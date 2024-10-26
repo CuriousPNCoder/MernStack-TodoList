@@ -1,12 +1,15 @@
 "use client"
 import { useGlobalState } from '@/app/Context/GlobalProvider'
+import { CreateContent } from '@/app/Modals/CreateContent'
 import React from 'react'
 import styled from 'styled-components'
 
 const Tasks = () => {
     const {theme} = useGlobalState();
   return (
-    <TaskStyled theme={theme}>Tasks</TaskStyled>
+    <TaskStyled theme={theme}>
+        <CreateContent/>
+    </TaskStyled>
   )
 }
 
