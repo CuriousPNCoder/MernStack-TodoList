@@ -56,4 +56,5 @@ z-index: 100;
     border-radius: 1rem;
     background-color: ${(props) => props.theme.colorBg2};
 }
+    
 `;

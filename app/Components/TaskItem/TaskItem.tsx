@@ -38,7 +38,7 @@ const TaskItem = ({ title, description, date, isCompleted, id }: Props ) => {
             }>Incompleted</button>)
             }
             <button className="edit">
-                Edit
+                {/* Edit */}
             </button>
             <button className='delete' onClick={() => 
                 deleteTask(id)
