@@ -4,6 +4,8 @@ import { title } from 'process'
 import React from 'react'
 import styled from 'styled-components'
 import TaskItem from '../TaskItem/TaskItem'
+import { Modal } from '@/app/Modals/Modal'
+import CreateContent from '@/app/Modals/CreateContent'
 
 interface Props {
   title: string;
@@ -11,10 +13,11 @@ interface Props {
 }
 
 const Tasks = ({ title, tasks }: Props) => {
-  const { theme, isLoading } = useGlobalState();
+  const { theme, isLoading, openModal, modal } = useGlobalState();
 
   return (
     <TaskStyled theme={theme}>
+      {modal && <Modal content={<CreateContent />}/>}
       <h1>{title}</h1>
     {!isLoading ? <div className='tasks grid'>
         {tasks.map((task) => (
@@ -26,7 +29,7 @@ const Tasks = ({ title, tasks }: Props) => {
             id={task.id}
           />
         ))}
-        <button className="create-task">
+        <button className="create-task" onClick={openModal}>
           + Add Task
         </button>
       </div> : <div className='w-full h-full flex items-center justify-center'><span className='loader'></span></div>}
