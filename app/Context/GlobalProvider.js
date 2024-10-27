@@ -41,6 +41,17 @@ export const GlobalProvider = ({children})=> {
         }
     }
 
+    const updateTask = async (task) => {
+        try{
+            const res = await axios.put(`/api/tasks`, task);
+            toast.success("Task updated successfully");
+            allTasks();
+        }catch(error){
+            console.log(error);
+            toast.error("Something went wrong");
+        }
+    } 
+
     const completedTask = tasks.filter((task) => task.isCompleted === true);
     const importantTask = tasks.filter((task) => task.important === true);
     const inCompletedTask = tasks.filter((task) => task.isCompleted === false);
@@ -58,6 +69,7 @@ export const GlobalProvider = ({children})=> {
             completedTask,
             importantTask,
             inCompletedTask,
+            updateTask,
         }}>
             <GlobalUpdateContext.Provider value={{}}>
                 {children}

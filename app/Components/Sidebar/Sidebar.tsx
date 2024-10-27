@@ -8,11 +8,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation'; 
 import { usePathname } from 'next/navigation';
 import Button from '../Button/Button';
-import { useClerk } from '@clerk/nextjs';
+import { useClerk, UserButton, useUser } from '@clerk/nextjs';
 
 const Sidebar = () => {
     const { theme } = useGlobalState();
     const {signOut} = useClerk();
+
+     // Correctly get user data
+     const userInfo = useUser(); 
+     const user = userInfo.user;
+ 
+     // Safely access user properties
+     const firstName = user?.firstName || '';
+     const lastName = user?.lastName || '';
+     const imageUrl = user?.imageUrl || '';
     const router = useRouter();
    const pathname = usePathname();
 
@@ -21,18 +30,20 @@ const Sidebar = () => {
        <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
-        <Image width={70} height={70} src="/images/profile.avif" alt="profile" />
+        {/* <Image width={60} height={60} src={imageUrl} alt="profile" /> */}
+        </div>
+        <div className='user-btn absolute z-20 top-0 w-full h-full'>
+            <UserButton/>
         </div>
         <h1>
-            <span>Puja</span>
-            <span>Saha</span>
+            {firstName} {lastName}
         </h1>
         </div> 
         <ul className='nav-items'>
         {menu.map((item)=>{
             const link = item.link;
             return(
-                <li className={`nav-item ${pathname === link ? "active" : ""}`}
+                <li key={item.id} className={`nav-item ${pathname === link ? "active" : ""}`}
                 >
                     {item.icon}
                     <Link href={item.link}>{item.title}</Link>
@@ -70,6 +81,25 @@ const SidebarStyled = styled.nav`
     flex-direction: column;
     justify-content: space-between;
     color: ${(props) =>props.theme.colorGrey3};
+
+
+.user-btn{
+    .cl-rootBox{
+    width: 100% ;
+    height: 100%;
+
+    .cl-userButtonBox{
+    width: 100%;
+    height: 100%;
+    // opacity: 0;
+
+    .cl-userButtonTrigger{
+    width: 100%;
+    height: 100%;
+    }
+}
+}
+}
 
 .profile{
     margin: 1.5rem;

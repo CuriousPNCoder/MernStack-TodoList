@@ -76,15 +76,25 @@ export async function GET (req: Request) {
 }
 export async function PUT (req: Request) {
     try{
+        const { userId } = await auth();
+        const { isCompleted, id } = await req.json();
+    
+        if (!userId) {
+            return NextResponse.json({ error: "Not Authenticated" }, { status: 401 });
+        }
+
+        const task = await prisma.task.update({
+            where: {
+                id,
+            },
+            data: {
+                isCompleted,
+            }
+        });
+        console.log("Updated Task:", task);
+        return NextResponse.json(task);
     }catch (error) {
         console.log("Error Updating Task", error);
         return NextResponse.json({error: "Error Updating Task"}, {status: 500});
-    }
-}
-export async function DELETE (req: Request) {
-    try{
-    }catch (error) {
-        console.log("Error Deleting Task", error);
-        return NextResponse.json({error: "Error Deleting Task"}, {status: 500});
     }
 }
