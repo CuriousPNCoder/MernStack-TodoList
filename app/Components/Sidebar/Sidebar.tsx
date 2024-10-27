@@ -1,23 +1,19 @@
-"use client"; // Make sure this is at the top of the file
+"use client"; 
 import React from 'react'
 import styled from 'styled-components';
 import Image from 'next/image'; 
 import menu from '../../../app/utils/Menu'
 import {useGlobalState} from '../../../app/Context/GlobalProvider';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'; 
 import { usePathname } from 'next/navigation';
+import Button from '../Button/Button';
+import { useClerk } from '@clerk/nextjs';
 
 const Sidebar = () => {
     const { theme } = useGlobalState();
-    // const router = useRouter();
-
-    // const handleClick = (link: string) => {
-    //     if (router) {
-    //         router.push(link);
-    //     }
-    // };
-
+    const {signOut} = useClerk();
+    const router = useRouter();
    const pathname = usePathname();
 
   return (
@@ -44,7 +40,21 @@ const Sidebar = () => {
             )
         })}
         </ul>
-        <button></button>
+        <div className="sign-out relative m-6">
+            <Button 
+            name={"Sign Out"}
+            type={"submit"}
+            paddding={"0.4rem 0.8rem"}
+            borderRad={"0.8rem"}
+            fw={"500"}
+            fs={"1.2rem"}
+            // icon={logout}
+            click={() => signOut(() => {
+                router.push('/sign-in');
+            })}
+
+            />
+        </div>
     </SidebarStyled>
   )
 }

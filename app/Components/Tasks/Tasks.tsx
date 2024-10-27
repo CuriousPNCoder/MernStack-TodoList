@@ -1,6 +1,5 @@
 "use client"
 import { useGlobalState } from '@/app/Context/GlobalProvider'
-import { CreateContent } from '@/app/Modals/CreateContent'
 import { title } from 'process'
 import React from 'react'
 import styled from 'styled-components'
@@ -12,11 +11,12 @@ interface Props {
 }
 
 const Tasks = ({ title, tasks }: Props) => {
-  const { theme } = useGlobalState();
+  const { theme, isLoading } = useGlobalState();
+
   return (
     <TaskStyled theme={theme}>
       <h1>{title}</h1>
-      <div className='tasks grid'>
+    {!isLoading ?    <div className='tasks grid'>
         {tasks.map((task) => (
           <TaskItem key={task.id}
             title={task.title}
@@ -29,7 +29,7 @@ const Tasks = ({ title, tasks }: Props) => {
         <button className="create-task">
           + Add Task
         </button>
-      </div>
+      </div> : <div className='w-full h-full flex items-center justify-center'><span className='loader'></span></div>}
     </TaskStyled>
   )
 }

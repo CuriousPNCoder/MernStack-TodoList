@@ -6,6 +6,7 @@ import GlobalStylesProvider from "./Providers/GlobalStylesProvider";
 import ContextProvider from "./Providers/ContextProvider";
 import { ClerkProvider, RedirectToSignIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,6 +46,11 @@ export default async function RootLayout({
           />
         </head>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <NextTopLoader 
+          height={2}
+          color="red"
+          easing="cubic-bezier(0.53, 0.21, 0, 1)"
+          />
           <ContextProvider>
             <GlobalStylesProvider>
             {userId ? <Sidebar /> : <RedirectToSignIn />}
