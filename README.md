@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# Todo List
+
+While it resembles a simple todo list, this application offers much more. It includes email-based authentication, user profile management, and the ability for users to easily update their status with just one click. The task list supports sorting by completed and incomplete items, and users can search for specific tasks. Additionally, pagination is implemented for enhanced navigation.
+
+
+
+
+## Benefits
+
+ - Authentication System
+ - Status Update
+ - Task Wise Search
+ - Pagination Benefits
+ - Manage your profile
+
+
+
+## Technologies Used
+
+ - Next.js - A React framework for server-rendered applications.
+ - TypeScript - A typed superset of JavaScript for better development experience.
+ - Styled-components - For styling React components.
+ - Prisma - A modern ORM for database interaction.
+ - Clerk - For authentication.
+ - Axios - For making HTTP requests.
+ - React Hot Toast - For notifications.
+ - Moment.js - For date formatting.
+ - Next.js Loader - For loading indicators.
 ## Getting Started
 
-First, run the development server:
+### Frontend Setup
 
+- Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [repository-url]
+cd [repository-name]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Set up your Next.js environment:
+```bash
+npm run dev
+```
+### Authentication
+- Implement authentication using Clerk:
+    - Follow the Clerk documentation for setup instructions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### API Setup
+- Set up Prisma for database interaction:
+```bash
+npx prisma init
+```
+- Configure your database in the prisma/schema.prisma file.
+- Create API routes for CRUD operations:
+    - Implement error handling for each operation (POST, GET, PUT, DELETE).
 
-## Learn More
+### Usage
+- Start the development server:
+```bash
+npm run dev
+```
+- Open your browser and navigate to http://localhost:3000 to see your application in action.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![alt text](image.png)
